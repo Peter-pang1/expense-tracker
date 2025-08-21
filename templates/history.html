@@ -26,10 +26,10 @@
       <tbody>
         {% for e in expenses %}
         <tr>
-          <td>{{ e[1] }} ฿</td>
-          <td>{{ e[2] }}</td>
-          <td>{{ e[3] }}</td>
-          <td>{{ e[4] }}</td>
+          <td>{{ e["amount"] }} ฿</td>
+          <td>{{ e["category"] }}</td>
+          <td>{{ e["date"] }}</td>
+          <td>{{ e["note"] }}</td>
         </tr>
         {% endfor %}
       </tbody>

@@ -25,3 +25,8 @@ def init_db():
 
 def get_connection():
     return sqlite3.connect("expenses.db")
+
+def get_connection():
+    conn = sqlite3.connect("expenses.db")
+    conn.row_factory = sqlite3.Row
+    return conn
