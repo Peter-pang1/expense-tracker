@@ -3,9 +3,9 @@ from services.database import init_db
 from services.expense_service import add_expense, get_expenses, get_expenses_by_date
 from services.report_service import get_summary_by_category, get_summary_by_month
 from services.user_service import register_user, get_user
-
+import os
 app = Flask(__name__)
-app.secret_key = "my_secret_key"  # คีย์สำหรับ session
+app.secret_key = "my_secret_key" 
 
 @app.route("/")
 def index():
@@ -78,3 +78,8 @@ def logout():
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)
+if __name__ == "__main__":
+    from services.database import init_db
+    init_db()
+    port = int(os.environ.get("PORT", 5000))  # Render จะส่งค่า PORT มา
+    app.run(host="0.0.0.0", port=port)
