@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">📊 Dashboard</h2>
+
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">ค่าใช้จ่ายตามหมวดหมู่</h5>
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">ค่าใช้จ่ายรายเดือน</h5>
+        <canvas id="monthChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const categoryData = {{ category_summary|tojson }};
+const monthData = {{ month_summary|tojson }};
+
+new Chart(document.getElementById('categoryChart'), {
+    type: 'pie',
+    data: {
+        labels: categoryData.map(c => c.category),
+        datasets: [{
+            data: categoryData.map(c => c.total),
+            backgroundColor: ['#FF6384','#36A2EB','#FFCE56','#4CAF50','#FF9800']
+        }]
+    }
+});
+
+new Chart(document.getElementById('monthChart'), {
+    type: 'bar',
+    data: {
+        labels: monthData.map(m => m.month),
+        datasets: [{
+            label: "ยอดรวม (บาท)",
+            data: monthData.map(m => m.total),
+            backgroundColor: '#36A2EB'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+    }
+});
+</script>
+{% endblock %}
