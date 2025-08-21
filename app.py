@@ -76,10 +76,8 @@ def logout():
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
-if __name__ == "__main__":
     from services.database import init_db
-    init_db()
+    init_db()  # เตรียม database ให้พร้อมก่อนรัน
+
     port = int(os.environ.get("PORT", 5000))  # Render จะส่งค่า PORT มา
     app.run(host="0.0.0.0", port=port)
